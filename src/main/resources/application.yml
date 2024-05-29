@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-cpbo3scf7o1s73840rdg-a.oregon-postgres.render.com/access_key
+    username: access_key_user
+    password: j8kVwP27rLEWspWppcysZK5NfLK0YFZz
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+spring.mail.host: smtp.gmail.com
+spring.mail.port: 587
+spring.mail.username: kojoaidoi@gmail.com
+spring.mail.password: ihokarsohfcyssnl
+spring.mail.properties.mail.smtp.auth: true
+spring.mail.properties.mail.smtp.starttls.enable: true
+
+
+
+
+
