@@ -100,7 +100,7 @@ public class UserController {
 
     }
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getUser(){
+    public ResponseEntity<List<User>> getUsers(){
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
     @DeleteMapping("/delete")
