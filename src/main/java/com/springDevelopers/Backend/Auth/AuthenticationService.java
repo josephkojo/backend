@@ -6,10 +6,15 @@ import com.springDevelopers.Backend.Repositories.UserRepository;
 import com.springDevelopers.Backend.SpringSecurity.JwtService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +78,10 @@ public class AuthenticationService {
 
 
 
+    }
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> generateUser(){
+        return new ResponseEntity<>(this.userRepository.findAll(), HttpStatus.OK);
     }
 
 
