@@ -59,36 +59,19 @@ public class AuthenticationService {
 
     }
     public AuthenticateResponse loginUser(AuthenticateRequest authenticateRequest){
-
-        if(authenticateRequest.getEmail().equals("mosesmensah081@gmail.com") && authenticateRequest.getPassword().equals("ebo") ){
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticateRequest.getEmail(),
-                    authenticateRequest.getPassword()));
-            User user = this.userRepository.findByEmail(authenticateRequest.getEmail()).orElseThrow();
-            String token = this.jwtService.generateToken(user);
-            AuthenticateResponse authenticateResponse = new AuthenticateResponse();
-            authenticateResponse.setId(user.getId());
-            authenticateResponse.setFirstname(user.getFirstname());
-            authenticateResponse.setEmail(user.getEmail());
-            authenticateResponse.setRole(user.getRole().toString());
-            authenticateResponse.setToken(token);
-            return authenticateResponse;
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticateRequest.getEmail(),
+                authenticateRequest.getPassword()));
+        User user = this.userRepository.findByEmail(authenticateRequest.getEmail()).orElseThrow();
+        String token = this.jwtService.generateToken(user);
+        AuthenticateResponse authenticateResponse = new AuthenticateResponse();
+        authenticateResponse.setId(user.getId());
+        authenticateResponse.setFirstname(user.getFirstname());
+        authenticateResponse.setEmail(user.getEmail());
+        authenticateResponse.setRole(user.getRole().toString());
+        authenticateResponse.setToken(token);
+        return authenticateResponse;
 
 
-
-        }else{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticateRequest.getEmail(),
-                    authenticateRequest.getPassword()));
-            User user = this.userRepository.findByEmail(authenticateRequest.getEmail()).orElseThrow();
-            String token = this.jwtService.generateToken(user);
-            AuthenticateResponse authenticateResponse = new AuthenticateResponse();
-            authenticateResponse.setId(user.getId());
-            authenticateResponse.setFirstname(user.getFirstname());
-            authenticateResponse.setEmail(user.getEmail());
-            authenticateResponse.setRole(user.getRole().toString());
-            authenticateResponse.setToken(token);
-            return authenticateResponse;
-
-        }
 
     }
 
