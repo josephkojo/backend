@@ -1,5 +1,6 @@
 package com.springDevelopers.Backend.Controllers;
 
+
 import com.springDevelopers.Backend.DTO.AccessKeyDTO;
 import com.springDevelopers.Backend.DTO.AccessKeysDTO;
 import com.springDevelopers.Backend.DTO.Counter;
@@ -10,9 +11,10 @@ import com.springDevelopers.Backend.Repositories.UserRepository;
 import com.springDevelopers.Backend.Services.AccessKeyService;
 import com.springDevelopers.Backend.Services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -101,6 +103,14 @@ public class UserController {
     public ResponseEntity<List<User>> getUser(){
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
+    @DeleteMapping("/delete")
+    public ResponseEntity<List<User>> deleteUser(){
+        this.userRepository.deleteAll();
+        return new ResponseEntity<>(this.userRepository.findAll(), HttpStatus.OK);
+
+    }
+
+
 
 
 }
