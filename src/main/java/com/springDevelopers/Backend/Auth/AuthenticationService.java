@@ -79,10 +79,7 @@ public class AuthenticationService {
 
 
     }
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> generateUser(){
-        return new ResponseEntity<>(this.userRepository.findAll(), HttpStatus.OK);
-    }
+
 
 
 
