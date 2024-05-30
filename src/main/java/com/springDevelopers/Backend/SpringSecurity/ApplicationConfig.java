@@ -2,8 +2,7 @@ package com.springDevelopers.Backend.SpringSecurity;
 
 import com.springDevelopers.Backend.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -44,11 +43,7 @@ public class ApplicationConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public Logger logger() {
-        return (Logger) LoggerFactory.getLogger(Thread.currentThread().getStackTrace()[2].getClassName());
-    }
+
 
 
 
