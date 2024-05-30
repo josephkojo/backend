@@ -97,5 +97,9 @@ public class UserController {
         }
 
     }
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getUser(){
+        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+    }
 
 }

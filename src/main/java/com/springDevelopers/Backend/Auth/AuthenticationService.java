@@ -39,14 +39,14 @@ public class AuthenticationService {
     }
 
     @PostConstruct
-    public AuthenticateResponse registerAdmin(){
+    public AuthenticateResponse registerAdmin() {
         User user = new User();
         user.setFirstname("Isaac");
         user.setLastname("Asante");
         user.setSchoolEmail("bompeh@gmail.com");
         user.setEmail("mosesmensah081@gmail.com");
         user.setRole(Role.ADMIN);
-        user.setPassword(passwordEncoder.encode("ebo"));
+        user.setPassword(passwordEncoder.encode("ebo")); // Ensure password is encoded
         this.userRepository.save(user);
         String token = jwtService.generateToken(user);
         AuthenticateResponse authenticateResponse = new AuthenticateResponse();
@@ -56,8 +56,8 @@ public class AuthenticationService {
         authenticateResponse.setRole(user.getRole().toString());
         authenticateResponse.setToken(token);
         return authenticateResponse;
-
     }
+
     public AuthenticateResponse loginUser(AuthenticateRequest authenticateRequest){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticateRequest.getEmail(),
                 authenticateRequest.getPassword()));
