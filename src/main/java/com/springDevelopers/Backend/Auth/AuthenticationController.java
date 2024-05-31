@@ -40,7 +40,7 @@ public class AuthenticationController {
 
     }
     @PostMapping("/login")
-    @CrossOrigin(origins ="https://accesskey.onrender.com/")
+    @CrossOrigin(origins ="https://accesskey.onrender.com")
     public ResponseEntity<AuthenticateResponse> loginUser(@RequestBody AuthenticateRequest authenticateRequest){
 
 
