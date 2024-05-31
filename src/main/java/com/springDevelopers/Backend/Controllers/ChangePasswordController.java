@@ -40,7 +40,8 @@ public class ChangePasswordController {
             Integer code = generateVerificationCode();
             MailBody mailBody =  new MailBody();
             mailBody.setRecipient(email);
-            mailBody.setText("Please enter this verification code to reset Account "+ code);
+            mailBody.setText("Please enter this verification code to reset Account "+ code +
+                    "<br><br> <strong>visit this link to reset password </strong> https://accesskey.onrender.com/forgotPassword");
             mailBody.setSubject("ForgotPassword");
             ForgotPassword forgotPassword = new ForgotPassword();
             forgotPassword.setOtp(code);
