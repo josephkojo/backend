@@ -43,25 +43,25 @@ public class AuthenticationService {
         return authenticateResponse;
     }
 
-    @PostConstruct
-    public AuthenticateResponse registerAdmin() {
-        User user = new User();
-        user.setFirstname("Isaac");
-        user.setLastname("Asante");
-        user.setSchoolEmail("bompeh@gmail.com");
-        user.setEmail("mosesmensah081@gmail.com");
-        user.setRole(Role.ADMIN);
-        user.setPassword(passwordEncoder.encode("ebo")); // Ensure password is encoded
-        this.userRepository.save(user);
-        String token = jwtService.generateToken(user);
-        AuthenticateResponse authenticateResponse = new AuthenticateResponse();
-        authenticateResponse.setId(user.getId());
-        authenticateResponse.setFirstname(user.getFirstname());
-        authenticateResponse.setEmail(user.getEmail());
-        authenticateResponse.setRole(user.getRole().toString());
-        authenticateResponse.setToken(token);
-        return authenticateResponse;
-    }
+//    @PostConstruct
+//    public AuthenticateResponse registerAdmin() {
+//        User user = new User();
+//        user.setFirstname("Isaac");
+//        user.setLastname("Asante");
+//        user.setSchoolEmail("bompeh@gmail.com");
+//        user.setEmail("mosesmensah081@gmail.com");
+//        user.setRole(Role.ADMIN);
+//        user.setPassword(passwordEncoder.encode("ebo"));
+//        this.userRepository.save(user);
+//        String token = jwtService.generateToken(user);
+//        AuthenticateResponse authenticateResponse = new AuthenticateResponse();
+//        authenticateResponse.setId(user.getId());
+//        authenticateResponse.setFirstname(user.getFirstname());
+//        authenticateResponse.setEmail(user.getEmail());
+//        authenticateResponse.setRole(user.getRole().toString());
+//        authenticateResponse.setToken(token);
+//        return authenticateResponse;
+//    }
 
     public AuthenticateResponse loginUser(AuthenticateRequest authenticateRequest){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticateRequest.getEmail(),
