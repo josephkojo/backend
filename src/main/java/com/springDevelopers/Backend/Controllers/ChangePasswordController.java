@@ -58,16 +58,16 @@ public class ChangePasswordController {
 //
 //    }
     @PostMapping("/{emails}")
-    public ResponseEntity<String> setEmail(@PathVariable String email){
+    public ResponseEntity<String> setEmail(@PathVariable String emails){
         try{
-            User user = userRepository.findByEmail(email).orElseThrow(() ->
+            User user = userRepository.findByEmail(emails).orElseThrow(() ->
                     new UsernameNotFoundException("user email does not exist"));
             if(user == null){
                 return ResponseEntity.notFound().build();
             }
             Integer code = generateVerificationCode();
             MailBody mailBody = new MailBody();
-            mailBody.setRecipient(email);
+            mailBody.setRecipient(emails);
             mailBody.setText("Please enter this verification code to reset Account "+ code + "\n"+
                     "visit this link to reset password  https://accesskey.onrender.com/code");
             mailBody.setSubject("ForgotPassword");
