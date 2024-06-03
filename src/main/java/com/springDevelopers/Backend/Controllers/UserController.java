@@ -50,8 +50,8 @@ public class UserController {
         AccessKey accessKey = new AccessKey();
         accessKey.setKeyName(keyName);
         accessKey.setStatus(Status.ACTIVE);
-        accessKey.setDateOfProcurement(LocalDate.now().minusDays(1));
-        accessKey.setExpiryDate(LocalDate.now());
+        accessKey.setDateOfProcurement(LocalDate.now());
+        accessKey.setExpiryDate(LocalDate.now().plusDays(1));
         accessKey.setUser(user);
         this.accessKeyService.addAccessKey(accessKey);
 
