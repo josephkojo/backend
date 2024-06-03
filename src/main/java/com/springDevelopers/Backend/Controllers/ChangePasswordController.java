@@ -1,6 +1,7 @@
 package com.springDevelopers.Backend.Controllers;
 
 import com.springDevelopers.Backend.DTO.ChangePassword;
+import com.springDevelopers.Backend.DTO.Email;
 import com.springDevelopers.Backend.DTO.MailBody;
 import com.springDevelopers.Backend.DTO.VerifyOtp;
 import com.springDevelopers.Backend.Entities.ForgotPassword;
@@ -30,17 +31,17 @@ public class ChangePasswordController {
     private final EmailService emailService;
 
 
-    @PostMapping("/{email}")
-    public ResponseEntity<String> verifyEmail(@PathVariable String email){
+    @PostMapping("/email")
+    public ResponseEntity<String> verifyEmail(@RequestBody Email email){
         try{
-            User user = userRepository.findByEmail(email).orElseThrow(() ->
+            User user = userRepository.findByEmail(email.getEmail()).orElseThrow(() ->
                     new UsernameNotFoundException("user email does not exist"));
             if(user == null){
                 return ResponseEntity.notFound().build();
             }
             Integer code = generateVerificationCode();
             MailBody mailBody =  new MailBody();
-            mailBody.setRecipient(email);
+            mailBody.setRecipient(email.getEmail());
             mailBody.setText("Please enter this verification code to reset Account "+ code);
             mailBody.setSubject("ForgotPassword");
             ForgotPassword forgotPassword = new ForgotPassword();
