@@ -85,7 +85,7 @@ public class UserController {
             }
             List<AccessKey> listOfAccessKeyByUser = this.accessKeyService.getAllAccessKeyByUser(user);
             for(AccessKey accessKey: listOfAccessKeyByUser){
-                if(accessKey.getExpiryDate().isBefore(LocalDate.now()) && accessKey.getStatus() == Status.ACTIVE){
+                if(accessKey.getExpiryDate().equals(LocalDate.now()) && accessKey.getStatus() == Status.ACTIVE){
                     accessKey.setStatus(Status.EXPIRED);
                     this.accessKeyService.addAccessKey(accessKey);
 
