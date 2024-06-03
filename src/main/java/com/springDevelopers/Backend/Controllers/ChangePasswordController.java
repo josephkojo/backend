@@ -29,47 +29,19 @@ public class ChangePasswordController {
     private final UserRepository userRepository;
     private final EmailService emailService;
 
-//    @PostMapping("/{email}")
-//    public ResponseEntity<String> verifyEmail(@PathVariable String email){
-//        try{
-//            User user = userRepository.findByEmail(email).orElseThrow(() ->
-//                    new UsernameNotFoundException("user email does not exist"));
-//            if(user == null){
-//                return ResponseEntity.notFound().build();
-//            }
-//            Integer code = generateVerificationCode();
-//            MailBody mailBody =  new MailBody();
-//            mailBody.setRecipient(email);
-//            mailBody.setText("Please enter this verification code to reset Account "+ code + "\n"+
-//                    "visit this link to reset password  https://accesskey.onrender.com/code");
-//            mailBody.setSubject("ForgotPassword");
-//            ForgotPassword forgotPassword = new ForgotPassword();
-//            forgotPassword.setOtp(code);
-//            forgotPassword.setExpirationDate(new Date(System.currentTimeMillis() + 70000 * 1000));
-//            forgotPassword.setUser(user);
-//            emailService.simpleMailSender(mailBody);
-//            this.forgotPasswordRepository.save(forgotPassword);
-//
-//            return new ResponseEntity<>("Verification has been successfully sent", HttpStatus.OK);
-//        }catch (Exception exception){
-//            return ResponseEntity.internalServerError().body(exception.getMessage());
-//
-//        }
-//
-//    }
-    @PostMapping("/{emails}")
-    public ResponseEntity<String> setEmail(@PathVariable String emails){
+
+    @PostMapping("/{email}")
+    public ResponseEntity<String> verifyEmail(@PathVariable String email){
         try{
-            User user = userRepository.findByEmail(emails).orElseThrow(() ->
+            User user = userRepository.findByEmail(email).orElseThrow(() ->
                     new UsernameNotFoundException("user email does not exist"));
             if(user == null){
                 return ResponseEntity.notFound().build();
             }
             Integer code = generateVerificationCode();
-            MailBody mailBody = new MailBody();
-            mailBody.setRecipient(emails);
-            mailBody.setText("Please enter this verification code to reset Account "+ code + "\n"+
-                    "visit this link to reset password  https://accesskey.onrender.com/code");
+            MailBody mailBody =  new MailBody();
+            mailBody.setRecipient(email);
+            mailBody.setText("Please enter this verification code to reset Account "+ code);
             mailBody.setSubject("ForgotPassword");
             ForgotPassword forgotPassword = new ForgotPassword();
             forgotPassword.setOtp(code);
@@ -77,8 +49,8 @@ public class ChangePasswordController {
             forgotPassword.setUser(user);
             emailService.simpleMailSender(mailBody);
             this.forgotPasswordRepository.save(forgotPassword);
-            return new ResponseEntity<>("Verification has been successfully sent", HttpStatus.OK);
 
+            return new ResponseEntity<>("Verification has been successfully sent", HttpStatus.OK);
         }catch (Exception exception){
             return ResponseEntity.internalServerError().body(exception.getMessage());
 

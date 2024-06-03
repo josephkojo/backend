@@ -16,8 +16,8 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins("https://accesskey.onrender.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowedHeaders("*");
+//                        .allowCredentials(true);
             }
         };
     }
