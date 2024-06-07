@@ -42,7 +42,7 @@ public class AuthenticationController {
         MailBody mailBody = new MailBody();
         mailBody.setRecipient(registerRequest.getEmail());
         mailBody.setText("Congratulations Dear "+ registerRequest.getFirstname() + " your have been successfully  registered to" +
-                "the Access key Manager Platform ");
+                "the Access key Manager Platform follow this link to login https://accesskey.onrender.com/");
         mailBody.setSubject("Access Key Manager");
         emailService.simpleMailSender(mailBody);
 
