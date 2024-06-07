@@ -34,8 +34,12 @@ public class AuthenticationController {
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest){
         List<User> findAllUser = this.userService.findAllUser();
         for(User user: findAllUser){
-            if(user.getEmail().equals(registerRequest.getEmail()) || user.getSchoolEmail().equals(registerRequest.getSchoolEmail())){
+            if(user.getEmail().equals(registerRequest.getEmail()) ){
                 return new ResponseEntity<>("User Already exist", HttpStatus.BAD_REQUEST);
+            }
+            if(user.getSchoolEmail().equals(registerRequest.getSchoolEmail())){
+                return new ResponseEntity<>("User Already exist", HttpStatus.BAD_REQUEST);
+
             }
 
         }
