@@ -4,6 +4,7 @@ import com.springDevelopers.Backend.DTO.AccessKeyDTO;
 import com.springDevelopers.Backend.Entities.AccessKey;
 import com.springDevelopers.Backend.Entities.User;
 import com.springDevelopers.Backend.Enums.Status;
+import com.springDevelopers.Backend.Repositories.AccessKeyRepository;
 import com.springDevelopers.Backend.Services.AccessKeyService;
 import com.springDevelopers.Backend.Services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -20,6 +22,7 @@ import java.util.List;
 public class AdminController {
     private final AccessKeyService accessKeyService;
     private final UserService userService;
+    private  final AccessKeyRepository accessKeyRepository;
     @GetMapping("/getAllKeys")
     public ResponseEntity<List<AccessKeyDTO>> getAllKeysGenerated(){
         List<AccessKeyDTO> accessKeyDTOList = this.accessKeyService.getAllAccessKeys();
@@ -62,5 +65,17 @@ public class AdminController {
         dto.setExpiryDate(accessKey.getExpiryDate());
         dto.setSchoolEmail(accessKey.getUser().getSchoolEmail());
         return dto;
+    }
+    @PutMapping("/updateStatus")
+    public ResponseEntity<String> updateKeyStatus(){
+        List<AccessKey> AllKeyGenerated = this.accessKeyRepository.findAll();
+        for(AccessKey accessKey:AllKeyGenerated ){
+            if(accessKey.getStatus() == Status.ACTIVE && accessKey.getExpiryDate().equals(LocalDate.now())){
+                accessKey.setStatus(Status.EXPIRED);
+                this.accessKeyRepository.save(accessKey);
+            }
+        }
+        return new ResponseEntity<>("Update method was successful", HttpStatus.OK);
+
     }
 }
